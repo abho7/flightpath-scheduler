@@ -1,127 +1,127 @@
-# Flightpath — Optimal Degree Scheduling
+# Flightpath
 
-Find the fastest, highest-quality path through a college degree, respecting
-prerequisites, course availability, credit-load limits, and elective
-requirements — solved as a real constraint satisfaction / optimization
-problem, not a heuristic checklist.
+A tool that plans out which courses to take, and in which term, to finish a
+college degree as fast as possible without breaking any prerequisites,
+credit limits, or elective requirements. It's not a checklist app. It's an
+actual constraint solver.
 
-## The problem
+## Why this is a hard problem
 
-University course scheduling is a bounded-horizon variant of the
-[university timetabling problem](https://en.wikipedia.org/wiki/School_timetabling),
-which is **NP-hard** — it generalizes bin packing (credit loads per term)
-and graph coloring under precedence constraints (prerequisites). Given:
+Scheduling courses across a degree is a version of the university
+timetabling problem, which is NP-hard: it's got a bin-packing element
+(credit limits per term) and a graph-coloring element (prerequisites have
+to happen in the right order). Given a course catalog, a degree's
+requirements, and what a student has already completed, you have to find
+a term-by-term plan that satisfies everything and does it in as few
+semesters as possible, while also trying to pick good electives.
 
-- A course catalog, where each course has a term-offering pattern (e.g.
-  "only offered in Fall"), a prerequisite chain, a credit weight, and a
-  quality score (instructor rating)
-- A degree program with mandatory courses and elective pools ("take 7+
-  credits from this AI/ML list")
-- A student's completed courses and constraints (max credit load,
-  starting term, whether they'll avoid 8am classes)
+That's genuinely hard to brute-force once a catalog has more than a
+handful of courses, which is most of why this project exists: to build
+and test a real solver for it, not to fake one with nested if-statements.
 
-...find a term-by-term schedule that satisfies every requirement, in the
-fewest number of terms, while maximizing course quality.
+## How it actually solves it
 
-## How it's solved
+There are two solver backends, and the app picks whichever one is
+available.
 
-Two solver backends, selected automatically:
+The main one uses Google's OR-Tools CP-SAT solver. The problem gets
+modeled as an integer program: a boolean variable for every
+(course, term) pair, prerequisite constraints that force a course's
+prereqs into strictly earlier terms, credit-cap constraints per term, and
+constraints for elective pools where the solver actually chooses which
+courses to take, not just how many. It solves in two passes: first it
+finds the minimum number of terms needed, then it locks that in and
+re-solves to maximize course quality (using instructor ratings) without
+overloading any one term.
 
-**Primary — CP-SAT (Google OR-Tools)**
-The scheduling problem is modeled as an integer program: boolean decision
-variables `x[course, term]`, with prerequisite-ordering constraints,
-credit-load capacity constraints, and elective-selection constraints (the
-solver *chooses* which electives to take, not just how many). Solved in
-two lexicographic phases:
-  1. Minimize the number of terms needed to graduate.
-  2. Fix that minimum, then maximize total course quality subject to a
-     term-balance fairness bound.
+If OR-Tools isn't installed, there's a fallback: a backtracking search
+written from scratch, no external solver. It does topological ordering
+on prerequisites, prunes terms that don't fit credit-wise, and backtracks
+when it hits a dead end. It's not guaranteed optimal the way CP-SAT is,
+and on denser catalogs it can run into the same exponential blowup any
+naive backtracking search runs into, so there's a time budget on it that
+falls back to a simple greedy placement if the real search doesn't finish
+in time. This exists so the project runs with zero dependencies out of
+the box, and honestly it's also just a legitimate thing to point to if
+someone asks how you'd solve this without a library.
 
-**Fallback — pure-Python backtracking**
-If OR-Tools isn't installed, a dependency-free backtracking search
-(topological ordering + domain pruning + credit-load backtracking) finds
-a feasible schedule instead. It isn't provably optimal, but it's a real
-constraint-propagating search, not a greedy hack — and it means this repo
-runs end-to-end with zero external solver dependencies.
+Before either solver runs, the engine checks the catalog for
+contradictions, like a prerequisite cycle (course A needs course B needs
+course A), and reports exactly where the cycle is instead of just failing.
 
-Either way, the engine also does real correctness work up front:
-cycle detection in the prerequisite graph (a catalog that requires A
-before B before A is rejected with the exact cycle shown), and
-satisfiability checks that surface *why* a plan is infeasible rather than
-just returning "no."
+## Multiple degrees, not just one
 
-## Architecture
+The scheduler doesn't hardcode a single major. Catalogs live as JSON
+files in `backend/app/catalogs/`, and there are three included as
+templates: a generic CS degree, a generic business degree, and a generic
+psychology degree. None of them are copied from a real university, they're
+representative structures meant to be swapped out. See
+[CATALOG_GUIDE.md](./CATALOG_GUIDE.md) for how to build one for your
+actual school.
+
+## Project layout
 
 ```
 backend/
   app/
     models.py            # Course, DegreeProgram, ElectivePool, StudentProfile
-    sample_data.py        # toy CS degree catalog (24 courses, realistic prereq chains)
+    catalog_loader.py     # loads/validates catalogs from app/catalogs/*.json
+    catalogs/              # cs-generic.json, business-generic.json, psychology-generic.json
     solver/
       engine.py           # validation, cycle detection, term-calendar building, dispatch
-      ortools_solver.py    # CP-SAT model (optimal)
-      fallback_solver.py   # backtracking search (no external deps)
-    main.py               # FastAPI app: /api/catalog, /api/solve, /api/health
+      ortools_solver.py    # CP-SAT model, the optimal path
+      fallback_solver.py   # backtracking search, no external deps
+    main.py               # FastAPI app: /api/catalogs, /api/catalog/{id}, /api/solve, /api/health
   tests/
-    test_engine.py         # correctness properties: prereq ordering, credit caps,
-                            # no double-scheduling, elective minimums met, cycle detection
+    test_engine.py         # prereq ordering, credit caps, no double-scheduling, cycle detection
+    test_catalogs.py        # every shipped catalog solves and doesn't hang
 
 frontend/
   src/
-    App.jsx               # control panel + route board + live dependency graph
+    App.jsx               # program picker + control panel + route board + dependency graph
     api.js
-    styles.css            # "flight plan" visual system
+    styles.css
 ```
-
-### Why two solvers
-
-This is a deliberate engineering decision, not a fallback-because-I-had-to:
-OR-Tools gives a *provably optimal* schedule, but requiring it as a hard
-dependency makes the project fragile to demo. The backtracking solver is a
-legitimate constraint-satisfaction implementation in its own right (real
-topological ordering, real domain pruning, real backtracking on
-credit-overflow) — useful to walk through in an interview if asked "how
-would you solve this without a solver library?"
 
 ## Running it
 
-**Backend**
+Backend:
 ```bash
 cd backend
 pip install -r requirements.txt
 uvicorn app.main:app --reload --port 8000
 ```
 
-**Frontend**
+Frontend:
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-Then open `http://localhost:5173`. The dev server proxies `/api` to
+Open `http://localhost:5173`. The dev server proxies `/api` calls to
 `localhost:8000`.
 
-**Tests**
+Tests:
 ```bash
 cd backend
 pytest tests/ -v
 ```
 
-## The frontend
+## About the frontend
 
-The UI reframes the schedule as a flight plan: each term is a column
-("flight strip"), each course a chip, and prerequisite chains are drawn as
-connecting routes between chips — with the *critical path* (the actual
-chain of prerequisites determining how many terms you need) highlighted in
-amber. It's computed live from the DOM positions of the rendered course
-chips, not hardcoded coordinates.
+The UI treats the schedule like a flight plan instead of a spreadsheet.
+Each term is a column, each course is a chip, and prerequisite chains are
+drawn as connecting lines between chips, computed live from where the
+course cards actually land on the page. The chain of prerequisites that's
+actually forcing the number of terms (the critical path) gets highlighted
+so it's obvious what's driving the timeline, not just what's in it.
 
-## Extending it
+## What's left to do
 
-- Swap `sample_data.py` for a real university catalog (most registrars
-  publish course data as JSON/CSV or via an API)
-- Add professor-specific sections instead of one rating per course
-- Add a "what-if" mode: change your major and see which credits transfer
-- Persist student profiles instead of re-entering completed courses each
-  session
+- Real per-school catalogs instead of the generic templates (see the
+  catalog guide)
+- Section-level data instead of one rating per course
+- A "what if I switched majors" comparison mode
+- Saving a student's profile instead of re-checking completed courses
+  every time

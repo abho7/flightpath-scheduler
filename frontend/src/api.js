@@ -8,8 +8,12 @@ async function handle(res) {
   return res.json();
 }
 
-export async function fetchCatalog() {
-  return handle(await fetch(`${BASE}/catalog`));
+export async function fetchCatalogList() {
+  return handle(await fetch(`${BASE}/catalogs`));
+}
+
+export async function fetchCatalog(catalogId) {
+  return handle(await fetch(`${BASE}/catalog/${catalogId}`));
 }
 
 export async function fetchHealth() {

@@ -1,8 +1,10 @@
 import copy
 
+from app.catalog_loader import load_catalog_by_id
 from app.models import Course, StudentProfile, Term
-from app.sample_data import COURSES, CS_DEGREE
 from app.solver.engine import detect_prereq_cycle, solve_schedule
+
+CS_DEGREE, COURSES = load_catalog_by_id("cs-generic")
 
 
 def _assert_valid_schedule(result, courses, completed):

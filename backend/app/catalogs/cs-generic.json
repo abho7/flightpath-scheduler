@@ -1,0 +1,451 @@
+{
+  "id": "cs-generic",
+  "name": "B.S. Computer Science (generic 4-year)",
+  "description": "A representative computer science degree structure -- core sequence, math requirement, and AI/systems/theory electives. Not any specific university's actual requirements; use this as a template and swap in your real school's catalog.",
+  "courses": [
+    {
+      "code": "CS101",
+      "title": "Intro to Programming",
+      "credits": 4,
+      "terms_offered": [
+        "Fall",
+        "Spring",
+        "Summer"
+      ],
+      "prereqs": [],
+      "categories": [
+        "core"
+      ],
+      "rating": 4.2,
+      "is_early_morning": false
+    },
+    {
+      "code": "CS102",
+      "title": "Data Structures",
+      "credits": 4,
+      "terms_offered": [
+        "Fall",
+        "Spring"
+      ],
+      "prereqs": [
+        "CS101"
+      ],
+      "categories": [
+        "core"
+      ],
+      "rating": 4.0,
+      "is_early_morning": false
+    },
+    {
+      "code": "CS201",
+      "title": "Discrete Math",
+      "credits": 3,
+      "terms_offered": [
+        "Fall",
+        "Spring"
+      ],
+      "prereqs": [],
+      "categories": [
+        "core",
+        "math"
+      ],
+      "rating": 3.6,
+      "is_early_morning": false
+    },
+    {
+      "code": "CS210",
+      "title": "Computer Organization",
+      "credits": 4,
+      "terms_offered": [
+        "Fall"
+      ],
+      "prereqs": [
+        "CS102"
+      ],
+      "categories": [
+        "core"
+      ],
+      "rating": 3.4,
+      "is_early_morning": true
+    },
+    {
+      "code": "CS211",
+      "title": "Algorithms",
+      "credits": 4,
+      "terms_offered": [
+        "Fall",
+        "Spring"
+      ],
+      "prereqs": [
+        "CS102",
+        "CS201"
+      ],
+      "categories": [
+        "core"
+      ],
+      "rating": 4.5,
+      "is_early_morning": false
+    },
+    {
+      "code": "CS301",
+      "title": "Operating Systems",
+      "credits": 4,
+      "terms_offered": [
+        "Fall"
+      ],
+      "prereqs": [
+        "CS210",
+        "CS211"
+      ],
+      "categories": [
+        "core"
+      ],
+      "rating": 3.9,
+      "is_early_morning": false
+    },
+    {
+      "code": "CS302",
+      "title": "Databases",
+      "credits": 3,
+      "terms_offered": [
+        "Spring"
+      ],
+      "prereqs": [
+        "CS211"
+      ],
+      "categories": [
+        "core",
+        "systems_elective"
+      ],
+      "rating": 4.1,
+      "is_early_morning": false
+    },
+    {
+      "code": "CS310",
+      "title": "Computer Networks",
+      "credits": 3,
+      "terms_offered": [
+        "Spring"
+      ],
+      "prereqs": [
+        "CS210"
+      ],
+      "categories": [
+        "systems_elective"
+      ],
+      "rating": 3.7,
+      "is_early_morning": false
+    },
+    {
+      "code": "CS320",
+      "title": "Machine Learning",
+      "credits": 4,
+      "terms_offered": [
+        "Fall"
+      ],
+      "prereqs": [
+        "CS211",
+        "MATH220"
+      ],
+      "categories": [
+        "ai_elective"
+      ],
+      "rating": 4.7,
+      "is_early_morning": false
+    },
+    {
+      "code": "CS321",
+      "title": "Artificial Intelligence",
+      "credits": 3,
+      "terms_offered": [
+        "Spring"
+      ],
+      "prereqs": [
+        "CS211"
+      ],
+      "categories": [
+        "ai_elective"
+      ],
+      "rating": 4.4,
+      "is_early_morning": false
+    },
+    {
+      "code": "CS330",
+      "title": "Computer Graphics",
+      "credits": 3,
+      "terms_offered": [
+        "Spring"
+      ],
+      "prereqs": [
+        "CS211",
+        "MATH210"
+      ],
+      "categories": [
+        "ai_elective",
+        "theory_elective"
+      ],
+      "rating": 4.0,
+      "is_early_morning": false
+    },
+    {
+      "code": "CS340",
+      "title": "Theory of Computation",
+      "credits": 3,
+      "terms_offered": [
+        "Fall"
+      ],
+      "prereqs": [
+        "CS201",
+        "CS211"
+      ],
+      "categories": [
+        "theory_elective",
+        "core"
+      ],
+      "rating": 3.5,
+      "is_early_morning": true
+    },
+    {
+      "code": "CS350",
+      "title": "Distributed Systems",
+      "credits": 3,
+      "terms_offered": [
+        "Spring"
+      ],
+      "prereqs": [
+        "CS301"
+      ],
+      "categories": [
+        "systems_elective"
+      ],
+      "rating": 4.3,
+      "is_early_morning": false
+    },
+    {
+      "code": "CS360",
+      "title": "Security & Cryptography",
+      "credits": 3,
+      "terms_offered": [
+        "Fall"
+      ],
+      "prereqs": [
+        "CS211",
+        "MATH220"
+      ],
+      "categories": [
+        "systems_elective",
+        "theory_elective"
+      ],
+      "rating": 4.2,
+      "is_early_morning": false
+    },
+    {
+      "code": "CS400",
+      "title": "Senior Capstone",
+      "credits": 4,
+      "terms_offered": [
+        "Fall",
+        "Spring"
+      ],
+      "prereqs": [],
+      "categories": [
+        "core"
+      ],
+      "rating": 4.6,
+      "is_early_morning": false
+    },
+    {
+      "code": "CS420",
+      "title": "Deep Learning",
+      "credits": 3,
+      "terms_offered": [
+        "Spring"
+      ],
+      "prereqs": [
+        "CS320"
+      ],
+      "categories": [
+        "ai_elective"
+      ],
+      "rating": 4.8,
+      "is_early_morning": false
+    },
+    {
+      "code": "MATH210",
+      "title": "Calculus III",
+      "credits": 4,
+      "terms_offered": [
+        "Fall",
+        "Spring"
+      ],
+      "prereqs": [],
+      "categories": [
+        "math"
+      ],
+      "rating": 3.3,
+      "is_early_morning": true
+    },
+    {
+      "code": "MATH220",
+      "title": "Linear Algebra",
+      "credits": 3,
+      "terms_offered": [
+        "Fall",
+        "Spring"
+      ],
+      "prereqs": [
+        "MATH210"
+      ],
+      "categories": [
+        "math"
+      ],
+      "rating": 3.8,
+      "is_early_morning": false
+    },
+    {
+      "code": "MATH230",
+      "title": "Probability & Statistics",
+      "credits": 3,
+      "terms_offered": [
+        "Fall",
+        "Spring"
+      ],
+      "prereqs": [
+        "MATH210"
+      ],
+      "categories": [
+        "math",
+        "ai_elective"
+      ],
+      "rating": 3.9,
+      "is_early_morning": false
+    },
+    {
+      "code": "ENG101",
+      "title": "Composition",
+      "credits": 3,
+      "terms_offered": [
+        "Fall",
+        "Spring",
+        "Summer"
+      ],
+      "prereqs": [],
+      "categories": [
+        "humanities"
+      ],
+      "rating": 3.5,
+      "is_early_morning": false
+    },
+    {
+      "code": "ENG205",
+      "title": "Technical Writing",
+      "credits": 3,
+      "terms_offered": [
+        "Fall",
+        "Spring"
+      ],
+      "prereqs": [
+        "ENG101"
+      ],
+      "categories": [
+        "humanities"
+      ],
+      "rating": 3.7,
+      "is_early_morning": false
+    },
+    {
+      "code": "PHIL110",
+      "title": "Ethics",
+      "credits": 3,
+      "terms_offered": [
+        "Fall",
+        "Spring"
+      ],
+      "prereqs": [],
+      "categories": [
+        "humanities"
+      ],
+      "rating": 4.0,
+      "is_early_morning": false
+    },
+    {
+      "code": "HIST150",
+      "title": "Modern History",
+      "credits": 3,
+      "terms_offered": [
+        "Fall",
+        "Spring"
+      ],
+      "prereqs": [],
+      "categories": [
+        "humanities"
+      ],
+      "rating": 3.6,
+      "is_early_morning": false
+    },
+    {
+      "code": "ART120",
+      "title": "Intro to Design",
+      "credits": 3,
+      "terms_offered": [
+        "Fall",
+        "Spring"
+      ],
+      "prereqs": [],
+      "categories": [
+        "humanities"
+      ],
+      "rating": 3.9,
+      "is_early_morning": false
+    }
+  ],
+  "mandatory_codes": [
+    "CS101",
+    "CS102",
+    "CS201",
+    "CS210",
+    "CS211",
+    "CS301",
+    "CS302",
+    "CS340",
+    "CS400",
+    "MATH210",
+    "MATH220"
+  ],
+  "electives": [
+    {
+      "name": "AI Track",
+      "candidate_codes": [
+        "CS320",
+        "CS321",
+        "CS330",
+        "CS420",
+        "MATH230"
+      ],
+      "min_credits": 7,
+      "min_count": 0
+    },
+    {
+      "name": "Systems Track",
+      "candidate_codes": [
+        "CS310",
+        "CS350",
+        "CS360"
+      ],
+      "min_credits": 6,
+      "min_count": 0
+    },
+    {
+      "name": "Humanities",
+      "candidate_codes": [
+        "ENG101",
+        "ENG205",
+        "PHIL110",
+        "HIST150",
+        "ART120"
+      ],
+      "min_credits": 9,
+      "min_count": 0
+    }
+  ]
+}

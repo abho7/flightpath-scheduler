@@ -19,6 +19,8 @@ This exists for two reasons:
 
 from __future__ import annotations
 
+import time
+
 from app.models import Course, DegreeProgram, ScheduleResult, StudentProfile
 from app.solver.engine import build_term_calendar
 
@@ -93,7 +95,13 @@ def _backtrack_assign(
     max_credits: int,
     assignment: dict[str, int],
     term_load: dict[int, int],
+    deadline: float,
+    counter: list[int],
 ) -> bool:
+    counter[0] += 1
+    if counter[0] % 2000 == 0 and time.perf_counter() > deadline:
+        return False
+
     if idx == len(order):
         return True
 
@@ -122,12 +130,63 @@ def _backtrack_assign(
             continue
         assignment[code] = t
         term_load[t] = term_load.get(t, 0) + course.credits
-        if _backtrack_assign(order, idx + 1, courses, seasons, completed, max_credits, assignment, term_load):
+        if _backtrack_assign(order, idx + 1, courses, seasons, completed, max_credits, assignment, term_load, deadline, counter):
             return True
         del assignment[code]
         term_load[t] -= course.credits
+        if time.perf_counter() > deadline:
+            return False
 
     return False
+
+
+# Wall-clock budget (seconds) for a single term-count attempt, not a raw
+# node-count cap -- worst-case search trees for this problem can need well
+# over a million nodes even on instances that are "easy" in wall-clock
+# terms, so a node cap alone under- or over-shoots depending on the
+# instance. This keeps the fallback solver from hanging on denser catalogs
+# where naive backtracking is exponential in the worst case (this is a
+# real bin-packing-under-precedence problem -- see the CP-SAT solver for a
+# version that doesn't need this escape hatch).
+_SEARCH_TIME_BUDGET_SECONDS = 2.0
+
+
+def _greedy_only_assign(
+    order: list[str],
+    courses: dict[str, Course],
+    seasons: list,
+    completed: set[str],
+    max_credits: int,
+) -> dict[str, int] | None:
+    """No backtracking at all -- assign each course (in topological order)
+    to the first term that satisfies prereqs and credit load. O(courses *
+    terms), always terminates. Used as a last resort when the budgeted
+    backtracking search can't reach a verdict on a dense catalog: a
+    schedule found this way is valid but not load-balanced or optimal."""
+    assignment: dict[str, int] = {}
+    term_load: dict[int, int] = {}
+    for code in order:
+        course = courses[code]
+        lower_bound = 0
+        for p in course.prereqs:
+            if p in completed:
+                continue
+            if p not in assignment:
+                return None
+            lower_bound = max(lower_bound, assignment[p] + 1)
+        placed = False
+        for t in range(lower_bound, len(seasons)):
+            if seasons[t] not in course.terms_offered:
+                continue
+            if term_load.get(t, 0) + course.credits > max_credits:
+                continue
+            assignment[code] = t
+            term_load[t] = term_load.get(t, 0) + course.credits
+            placed = True
+            break
+        if not placed:
+            return None
+    return assignment
 
 
 def solve_with_backtracking(
@@ -141,31 +200,67 @@ def solve_with_backtracking(
     required = _expand_prereq_closure(mandatory | electives, courses, profile.completed_codes)
     order = _topological_order(required, courses)
 
+    budget_exhausted_anywhere = False
+
     for n_terms in range(1, profile.max_terms_horizon + 1):
         seasons = build_term_calendar(profile, n_terms)
         assignment: dict[str, int] = {}
         term_load: dict[int, int] = {}
+        deadline = time.perf_counter() + _SEARCH_TIME_BUDGET_SECONDS
+        counter = [0]
         ok = _backtrack_assign(
             order, 0, courses, seasons, profile.completed_codes,
-            profile.max_credits_per_term, assignment, term_load,
+            profile.max_credits_per_term, assignment, term_load, deadline, counter,
         )
+        if not ok and time.perf_counter() > deadline:
+            budget_exhausted_anywhere = True
         if ok:
-            term_labels = [f"{seasons[t].value} (Term {t + 1})" for t in range(n_terms)]
-            ratings = [courses[c].rating for c in assignment]
-            return ScheduleResult(
-                feasible=True,
-                terms_used=n_terms,
-                assignment=assignment,
-                term_labels=term_labels,
-                total_credits={t: term_load.get(t, 0) for t in range(n_terms)},
-                avg_rating=round(sum(ratings) / len(ratings), 2) if ratings else 0.0,
-                conflicts=notes,
-                solver_used="backtracking (fallback -- install ortools for optimal solving)",
+            return _build_result(seasons, n_terms, assignment, term_load, courses, notes, optimal_search=True)
+
+    # The budgeted search couldn't reach a verdict at some term count(s) --
+    # don't report "infeasible" outright, since that may just mean the
+    # search ran out of budget rather than proving no schedule exists. Try
+    # a fast, always-terminating greedy pass before giving up.
+    if budget_exhausted_anywhere:
+        for n_terms in range(1, profile.max_terms_horizon + 1):
+            seasons = build_term_calendar(profile, n_terms)
+            assignment = _greedy_only_assign(
+                order, courses, seasons, profile.completed_codes, profile.max_credits_per_term
             )
+            if assignment is not None:
+                term_load = {}
+                for code, t in assignment.items():
+                    term_load[t] = term_load.get(t, 0) + courses[code].credits
+                return _build_result(
+                    seasons, n_terms, assignment, term_load, courses, notes, optimal_search=False
+                )
 
     return ScheduleResult(
         feasible=False,
-        reason=f"No feasible schedule found within {profile.max_terms_horizon} terms.",
+        reason=(
+            f"No feasible schedule found within {profile.max_terms_horizon} terms."
+            + (" (search budget exceeded on a dense catalog -- try installing ortools for the optimal solver)" if budget_exhausted_anywhere else "")
+        ),
         conflicts=notes,
         solver_used="backtracking (fallback)",
+    )
+
+
+def _build_result(seasons, n_terms, assignment, term_load, courses, notes, optimal_search: bool) -> ScheduleResult:
+    term_labels = [f"{seasons[t].value} (Term {t + 1})" for t in range(n_terms)]
+    ratings = [courses[c].rating for c in assignment]
+    label = (
+        "backtracking (fallback -- install ortools for optimal solving)"
+        if optimal_search
+        else "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)"
+    )
+    return ScheduleResult(
+        feasible=True,
+        terms_used=n_terms,
+        assignment=assignment,
+        term_labels=term_labels,
+        total_credits={t: term_load.get(t, 0) for t in range(n_terms)},
+        avg_rating=round(sum(ratings) / len(ratings), 2) if ratings else 0.0,
+        conflicts=notes,
+        solver_used=label,
     )

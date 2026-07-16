@@ -2,9 +2,11 @@
 FastAPI app exposing the course-scheduling engine.
 
 Endpoints:
-  GET  /api/catalog          -> full course catalog + degree program
-  POST /api/solve            -> run the solver for a given student profile
-  GET  /api/health           -> liveness check + which solver backend is active
+  GET  /api/catalogs             -> list available degree catalogs (id, name, description)
+  GET  /api/catalog/{catalog_id} -> full course catalog + degree program for one catalog
+  POST /api/solve                -> run the solver for a given student profile + catalog
+  POST /api/catalog/validate     -> validate a custom uploaded catalog without solving
+  GET  /api/health               -> liveness check + which solver backend is active
 """
 
 from __future__ import annotations
@@ -13,11 +15,16 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
-from app.models import DegreeProgram, StudentProfile, Term
-from app.sample_data import COURSES, CS_DEGREE
+from app.catalog_loader import (
+    CatalogError,
+    list_catalogs,
+    load_catalog_by_id,
+    parse_catalog,
+)
+from app.models import Course, DegreeProgram, StudentProfile, Term
 from app.solver.engine import solve_schedule
 
-app = FastAPI(title="Course Scheduling Optimizer", version="1.0.0")
+app = FastAPI(title="Course Scheduling Optimizer", version="1.1.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -36,17 +43,11 @@ def _active_solver_name() -> str:
         return "backtracking fallback -- heuristic, install ortools for optimal solving"
 
 
-@app.get("/api/health")
-def health():
-    return {"status": "ok", "solver_backend": _active_solver_name()}
-
-
-@app.get("/api/catalog")
-def get_catalog():
+def _serialize_catalog(program: DegreeProgram, courses: dict[str, Course]) -> dict:
     return {
         "program": {
-            "name": CS_DEGREE.name,
-            "mandatory_codes": list(CS_DEGREE.mandatory_codes),
+            "name": program.name,
+            "mandatory_codes": list(program.mandatory_codes),
             "electives": [
                 {
                     "name": pool.name,
@@ -54,7 +55,7 @@ def get_catalog():
                     "min_credits": pool.min_credits,
                     "min_count": pool.min_count,
                 }
-                for pool in CS_DEGREE.electives
+                for pool in program.electives
             ],
         },
         "courses": {
@@ -68,12 +69,34 @@ def get_catalog():
                 "rating": c.rating,
                 "is_early_morning": c.is_early_morning,
             }
-            for code, c in COURSES.items()
+            for code, c in courses.items()
         },
     }
 
 
+@app.get("/api/health")
+def health():
+    return {"status": "ok", "solver_backend": _active_solver_name()}
+
+
+@app.get("/api/catalogs")
+def get_catalogs():
+    """Lightweight list for populating a catalog picker in the UI."""
+    return {"catalogs": list_catalogs()}
+
+
+@app.get("/api/catalog/{catalog_id}")
+def get_catalog(catalog_id: str):
+    try:
+        program, courses = load_catalog_by_id(catalog_id)
+    except CatalogError as e:
+        raise HTTPException(404, str(e))
+    return _serialize_catalog(program, courses)
+
+
 class SolveRequest(BaseModel):
+    catalog_id: str | None = None
+    custom_catalog: dict | None = None
     completed_codes: list[str] = Field(default_factory=list)
     max_credits_per_term: int = 18
     min_credits_per_term: int = 12
@@ -95,9 +118,39 @@ class SolveResponse(BaseModel):
     solver_used: str
 
 
+def _resolve_catalog(req: "SolveRequest") -> tuple[DegreeProgram, dict[str, Course]]:
+    if req.custom_catalog:
+        try:
+            return parse_catalog(req.custom_catalog)
+        except CatalogError as e:
+            raise HTTPException(400, f"Invalid custom catalog: {e}")
+    if req.catalog_id:
+        try:
+            return load_catalog_by_id(req.catalog_id)
+        except CatalogError as e:
+            raise HTTPException(404, str(e))
+    raise HTTPException(400, "Request must include either 'catalog_id' or 'custom_catalog'.")
+
+
+@app.post("/api/catalog/validate")
+def validate_catalog(catalog: dict):
+    try:
+        program, courses = parse_catalog(catalog)
+    except CatalogError as e:
+        return {"valid": False, "error": str(e)}
+    return {
+        "valid": True,
+        "course_count": len(courses),
+        "mandatory_count": len(program.mandatory_codes),
+        "elective_pool_count": len(program.electives),
+    }
+
+
 @app.post("/api/solve", response_model=SolveResponse)
 def solve(req: SolveRequest):
-    unknown = [c for c in req.completed_codes if c not in COURSES]
+    program, courses = _resolve_catalog(req)
+
+    unknown = [c for c in req.completed_codes if c not in courses]
     if unknown:
         raise HTTPException(400, f"Unknown completed course codes: {unknown}")
 
@@ -116,7 +169,7 @@ def solve(req: SolveRequest):
         max_terms_horizon=req.max_terms_horizon,
     )
 
-    result = solve_schedule(CS_DEGREE, COURSES, profile)
+    result = solve_schedule(program, courses, profile)
 
     return SolveResponse(
         feasible=result.feasible,
@@ -129,3 +182,4 @@ def solve(req: SolveRequest):
         conflicts=result.conflicts,
         solver_used=result.solver_used,
     )
+

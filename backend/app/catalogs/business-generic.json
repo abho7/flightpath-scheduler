@@ -1,0 +1,41 @@
+{
+  "id": "business-generic",
+  "name": "B.S. Business Administration (generic 4-year)",
+  "description": "A representative business degree structure -- core business sequence, a quantitative requirement, and finance/marketing/management electives. Not any specific university's actual requirements; use this as a template and swap in your real school's catalog.",
+  "courses": [
+    {"code": "BUS101", "title": "Intro to Business", "credits": 3, "terms_offered": ["Fall", "Spring", "Summer"], "prereqs": [], "categories": ["core"], "rating": 3.8},
+    {"code": "ACC201", "title": "Financial Accounting", "credits": 3, "terms_offered": ["Fall", "Spring"], "prereqs": [], "categories": ["core"], "rating": 3.5, "is_early_morning": true},
+    {"code": "ACC202", "title": "Managerial Accounting", "credits": 3, "terms_offered": ["Fall", "Spring"], "prereqs": ["ACC201"], "categories": ["core"], "rating": 3.6},
+    {"code": "ECON101", "title": "Microeconomics", "credits": 3, "terms_offered": ["Fall", "Spring", "Summer"], "prereqs": [], "categories": ["core"], "rating": 3.9},
+    {"code": "ECON102", "title": "Macroeconomics", "credits": 3, "terms_offered": ["Fall", "Spring"], "prereqs": ["ECON101"], "categories": ["core"], "rating": 3.7},
+    {"code": "STAT210", "title": "Business Statistics", "credits": 3, "terms_offered": ["Fall", "Spring"], "prereqs": [], "categories": ["core", "quant"], "rating": 3.4, "is_early_morning": true},
+    {"code": "BUS210", "title": "Business Law", "credits": 3, "terms_offered": ["Fall", "Spring"], "prereqs": [], "categories": ["core"], "rating": 4.0},
+    {"code": "BUS250", "title": "Organizational Behavior", "credits": 3, "terms_offered": ["Fall", "Spring"], "prereqs": ["BUS101"], "categories": ["core"], "rating": 4.1},
+    {"code": "FIN301", "title": "Corporate Finance", "credits": 3, "terms_offered": ["Fall"], "prereqs": ["ACC201", "STAT210"], "categories": ["core"], "rating": 4.2},
+    {"code": "MKT301", "title": "Marketing Principles", "credits": 3, "terms_offered": ["Spring"], "prereqs": ["BUS101"], "categories": ["core"], "rating": 4.3},
+    {"code": "OPS310", "title": "Operations Management", "credits": 3, "terms_offered": ["Fall"], "prereqs": ["STAT210"], "categories": ["core"], "rating": 3.6},
+    {"code": "BUS400", "title": "Strategic Management (Capstone)", "credits": 4, "terms_offered": ["Fall", "Spring"], "prereqs": ["FIN301", "MKT301", "OPS310"], "categories": ["core"], "rating": 4.5},
+    {"code": "FIN320", "title": "Investment Analysis", "credits": 3, "terms_offered": ["Spring"], "prereqs": ["FIN301"], "categories": ["finance_elective"], "rating": 4.4},
+    {"code": "FIN330", "title": "Financial Markets", "credits": 3, "terms_offered": ["Fall"], "prereqs": ["FIN301"], "categories": ["finance_elective"], "rating": 4.0},
+    {"code": "FIN410", "title": "International Finance", "credits": 3, "terms_offered": ["Spring"], "prereqs": ["FIN320"], "categories": ["finance_elective"], "rating": 4.1},
+    {"code": "MKT320", "title": "Consumer Behavior", "credits": 3, "terms_offered": ["Fall"], "prereqs": ["MKT301"], "categories": ["marketing_elective"], "rating": 4.2},
+    {"code": "MKT330", "title": "Digital Marketing", "credits": 3, "terms_offered": ["Spring"], "prereqs": ["MKT301"], "categories": ["marketing_elective"], "rating": 4.5},
+    {"code": "MKT410", "title": "Brand Strategy", "credits": 3, "terms_offered": ["Fall"], "prereqs": ["MKT320"], "categories": ["marketing_elective"], "rating": 4.3},
+    {"code": "MGT330", "title": "Leadership & Teams", "credits": 3, "terms_offered": ["Fall", "Spring"], "prereqs": ["BUS250"], "categories": ["management_elective"], "rating": 4.4},
+    {"code": "MGT340", "title": "Negotiation", "credits": 3, "terms_offered": ["Spring"], "prereqs": ["BUS250"], "categories": ["management_elective"], "rating": 4.6},
+    {"code": "ENG101", "title": "Composition", "credits": 3, "terms_offered": ["Fall", "Spring", "Summer"], "prereqs": [], "categories": ["humanities"], "rating": 3.5},
+    {"code": "ENG205", "title": "Business Writing", "credits": 3, "terms_offered": ["Fall", "Spring"], "prereqs": ["ENG101"], "categories": ["humanities"], "rating": 3.7},
+    {"code": "PHIL110", "title": "Business Ethics", "credits": 3, "terms_offered": ["Fall", "Spring"], "prereqs": [], "categories": ["humanities"], "rating": 4.0},
+    {"code": "COMM150", "title": "Public Speaking", "credits": 3, "terms_offered": ["Fall", "Spring"], "prereqs": [], "categories": ["humanities"], "rating": 4.1}
+  ],
+  "mandatory_codes": [
+    "BUS101", "ACC201", "ACC202", "ECON101", "ECON102", "STAT210",
+    "BUS210", "BUS250", "FIN301", "MKT301", "OPS310", "BUS400"
+  ],
+  "electives": [
+    {"name": "Finance Track", "candidate_codes": ["FIN320", "FIN330", "FIN410"], "min_credits": 6},
+    {"name": "Marketing Track", "candidate_codes": ["MKT320", "MKT330", "MKT410"], "min_credits": 6},
+    {"name": "Management Track", "candidate_codes": ["MGT330", "MGT340"], "min_credits": 3},
+    {"name": "Humanities", "candidate_codes": ["ENG101", "ENG205", "PHIL110", "COMM150"], "min_credits": 9}
+  ]
+}

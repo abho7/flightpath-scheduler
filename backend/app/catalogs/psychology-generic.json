@@ -1,0 +1,36 @@
+{
+  "id": "psychology-generic",
+  "name": "B.A. Psychology (generic 4-year)",
+  "description": "A representative psychology degree structure -- research methods sequence, core content areas, and clinical/cognitive/social electives. Not any specific university's actual requirements; use this as a template and swap in your real school's catalog.",
+  "courses": [
+    {"code": "PSY101", "title": "Intro to Psychology", "credits": 3, "terms_offered": ["Fall", "Spring", "Summer"], "prereqs": [], "categories": ["core"], "rating": 4.3},
+    {"code": "PSY201", "title": "Research Methods I", "credits": 4, "terms_offered": ["Fall", "Spring"], "prereqs": ["PSY101"], "categories": ["core"], "rating": 3.6, "is_early_morning": true},
+    {"code": "STAT210", "title": "Statistics for Psychology", "credits": 3, "terms_offered": ["Fall", "Spring"], "prereqs": [], "categories": ["core", "quant"], "rating": 3.4, "is_early_morning": true},
+    {"code": "PSY202", "title": "Research Methods II", "credits": 4, "terms_offered": ["Spring", "Fall"], "prereqs": ["PSY201", "STAT210"], "categories": ["core"], "rating": 3.8},
+    {"code": "PSY210", "title": "Biological Psychology", "credits": 3, "terms_offered": ["Fall"], "prereqs": ["PSY101"], "categories": ["core"], "rating": 3.9},
+    {"code": "PSY220", "title": "Developmental Psychology", "credits": 3, "terms_offered": ["Spring"], "prereqs": ["PSY101"], "categories": ["core"], "rating": 4.1},
+    {"code": "PSY230", "title": "Cognitive Psychology", "credits": 3, "terms_offered": ["Fall"], "prereqs": ["PSY101"], "categories": ["core", "cognitive_elective"], "rating": 4.4},
+    {"code": "PSY240", "title": "Social Psychology", "credits": 3, "terms_offered": ["Spring"], "prereqs": ["PSY101"], "categories": ["core", "social_elective"], "rating": 4.5},
+    {"code": "PSY400", "title": "Senior Thesis / Capstone", "credits": 4, "terms_offered": ["Fall", "Spring"], "prereqs": ["PSY202"], "categories": ["core"], "rating": 4.2},
+    {"code": "PSY310", "title": "Abnormal Psychology", "credits": 3, "terms_offered": ["Fall"], "prereqs": ["PSY101"], "categories": ["clinical_elective"], "rating": 4.3},
+    {"code": "PSY320", "title": "Clinical Interviewing", "credits": 3, "terms_offered": ["Spring"], "prereqs": ["PSY310"], "categories": ["clinical_elective"], "rating": 4.0},
+    {"code": "PSY330", "title": "Health Psychology", "credits": 3, "terms_offered": ["Fall"], "prereqs": ["PSY101"], "categories": ["clinical_elective"], "rating": 3.9},
+    {"code": "PSY340", "title": "Memory & Learning", "credits": 3, "terms_offered": ["Spring"], "prereqs": ["PSY230"], "categories": ["cognitive_elective"], "rating": 4.4},
+    {"code": "PSY350", "title": "Neuropsychology", "credits": 3, "terms_offered": ["Fall"], "prereqs": ["PSY210", "PSY230"], "categories": ["cognitive_elective"], "rating": 4.6},
+    {"code": "PSY360", "title": "Group Dynamics", "credits": 3, "terms_offered": ["Spring"], "prereqs": ["PSY240"], "categories": ["social_elective"], "rating": 4.1},
+    {"code": "PSY370", "title": "Cultural Psychology", "credits": 3, "terms_offered": ["Fall"], "prereqs": ["PSY240"], "categories": ["social_elective"], "rating": 4.3},
+    {"code": "ENG101", "title": "Composition", "credits": 3, "terms_offered": ["Fall", "Spring", "Summer"], "prereqs": [], "categories": ["humanities"], "rating": 3.5},
+    {"code": "ENG205", "title": "Scientific Writing", "credits": 3, "terms_offered": ["Fall", "Spring"], "prereqs": ["ENG101"], "categories": ["humanities"], "rating": 3.7},
+    {"code": "PHIL110", "title": "Ethics", "credits": 3, "terms_offered": ["Fall", "Spring"], "prereqs": [], "categories": ["humanities"], "rating": 4.0},
+    {"code": "BIO101", "title": "Intro Biology", "credits": 4, "terms_offered": ["Fall", "Spring"], "prereqs": [], "categories": ["humanities"], "rating": 3.6, "is_early_morning": true}
+  ],
+  "mandatory_codes": [
+    "PSY101", "PSY201", "STAT210", "PSY202", "PSY210", "PSY220", "PSY230", "PSY240", "PSY400"
+  ],
+  "electives": [
+    {"name": "Clinical Track", "candidate_codes": ["PSY310", "PSY320", "PSY330"], "min_credits": 6},
+    {"name": "Cognitive Track", "candidate_codes": ["PSY340", "PSY350"], "min_credits": 3},
+    {"name": "Social Track", "candidate_codes": ["PSY360", "PSY370"], "min_credits": 3},
+    {"name": "Humanities & Science", "candidate_codes": ["ENG101", "ENG205", "PHIL110", "BIO101"], "min_credits": 9}
+  ]
+}

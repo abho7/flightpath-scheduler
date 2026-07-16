@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { fetchCatalog, fetchHealth, solveSchedule } from "./api.js";
+import { fetchCatalog, fetchCatalogList, fetchHealth, solveSchedule } from "./api.js";
 
 const SEASON_OPTIONS = ["Fall", "Spring", "Summer"];
 
@@ -12,7 +12,7 @@ function StatBadge({ label, value, tone }) {
   );
 }
 
-function ControlPanel({ catalog, profile, setProfile, onRun, running, health }) {
+function ControlPanel({ catalogList, catalogId, setCatalogId, catalog, profile, setProfile, onRun, running, health }) {
   const categories = useMemo(() => {
     if (!catalog) return {};
     const groups = {};
@@ -40,6 +40,24 @@ function ControlPanel({ catalog, profile, setProfile, onRun, running, health }) 
           <h1>Flightpath</h1>
           <p className="brand-sub">Degree route planner</p>
         </div>
+      </div>
+
+      <div className="panel-section">
+        <div className="section-head">
+          <span>Program</span>
+        </div>
+        <select
+          className="program-select"
+          value={catalogId || ""}
+          onChange={(e) => setCatalogId(e.target.value)}
+        >
+          {catalogList.map((c) => (
+            <option key={c.id} value={c.id}>{c.name}</option>
+          ))}
+        </select>
+        {catalog && (
+          <p className="program-desc">{catalogList.find((c) => c.id === catalogId)?.description}</p>
+        )}
       </div>
 
       <div className="panel-section">
@@ -289,6 +307,8 @@ function RouteBoard({ catalog, result }) {
 }
 
 export default function App() {
+  const [catalogList, setCatalogList] = useState([]);
+  const [catalogId, setCatalogId] = useState(null);
   const [catalog, setCatalog] = useState(null);
   const [health, setHealth] = useState(null);
   const [profile, setProfile] = useState({
@@ -305,15 +325,28 @@ export default function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchCatalog().then(setCatalog).catch((e) => setError(e.message));
+    fetchCatalogList()
+      .then((data) => {
+        setCatalogList(data.catalogs);
+        if (data.catalogs.length > 0) setCatalogId(data.catalogs[0].id);
+      })
+      .catch((e) => setError(e.message));
     fetchHealth().then(setHealth).catch(() => setHealth(null));
   }, []);
+
+  useEffect(() => {
+    if (!catalogId) return;
+    setCatalog(null);
+    setResult(null);
+    setProfile((p) => ({ ...p, completed_codes: [] }));
+    fetchCatalog(catalogId).then(setCatalog).catch((e) => setError(e.message));
+  }, [catalogId]);
 
   const run = async () => {
     setRunning(true);
     setError(null);
     try {
-      const res = await solveSchedule(profile);
+      const res = await solveSchedule({ ...profile, catalog_id: catalogId });
       setResult(res);
     } catch (e) {
       setError(e.message);
@@ -326,6 +359,9 @@ export default function App() {
     <div className="app-shell">
       {catalog ? (
         <ControlPanel
+          catalogList={catalogList}
+          catalogId={catalogId}
+          setCatalogId={setCatalogId}
           catalog={catalog}
           profile={profile}
           setProfile={setProfile}
