@@ -5,7 +5,7 @@ college degree as fast as possible without breaking any prerequisites,
 credit limits, or elective requirements. It's not a checklist app. It's an
 actual constraint solver.
 
-## Why this is a hard problem
+## Difficulty
 
 Scheduling courses across a degree is a version of the university
 timetabling problem, which is NP-hard: it's got a bin-packing element
@@ -117,11 +117,3 @@ course cards actually land on the page. The chain of prerequisites that's
 actually forcing the number of terms (the critical path) gets highlighted
 so it's obvious what's driving the timeline, not just what's in it.
 
-## What's left to do
-
-- Real per-school catalogs instead of the generic templates (see the
-  catalog guide)
-- Section-level data instead of one rating per course
-- A "what if I switched majors" comparison mode
-- Saving a student's profile instead of re-checking completed courses
-  every time
