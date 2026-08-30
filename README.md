@@ -1,5 +1,8 @@
 # Flightpath
 
+[![tests](https://github.com/abho7/flightpath-scheduler/actions/workflows/tests.yml/badge.svg)](https://github.com/abho7/flightpath-scheduler/actions/workflows/tests.yml)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 A tool that plans out which courses to take, and in which term, to finish a
 college degree as fast as possible without breaking any prerequisites,
 credit limits, or elective requirements. It's not a checklist app. It's an
