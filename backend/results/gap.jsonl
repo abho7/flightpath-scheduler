@@ -1,0 +1,100 @@
+{"n": 20, "density": 0.5, "seed": 1, "cpsat_terms": 4, "bt_terms": 4, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 4}
+{"n": 20, "density": 1.0, "seed": 1, "cpsat_terms": 4, "bt_terms": 5, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 5}
+{"n": 20, "density": 0.5, "seed": 0, "cpsat_terms": 5, "bt_terms": 5, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 5}
+{"n": 20, "density": 1.5, "seed": 1, "cpsat_terms": 7, "bt_terms": 7, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 7}
+{"n": 20, "density": 2.0, "seed": 1, "cpsat_terms": 6, "bt_terms": 6, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 6}
+{"n": 20, "density": 1.0, "seed": 0, "cpsat_terms": 5, "bt_terms": 11, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 6}
+{"n": 20, "density": 1.5, "seed": 0, "cpsat_terms": 5, "bt_terms": 5, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 5}
+{"n": 20, "density": 2.0, "seed": 0, "cpsat_terms": 6, "bt_terms": 6, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 6}
+{"n": 40, "density": 0.5, "seed": 0, "cpsat_terms": 7, "bt_terms": 10, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 7}
+{"n": 40, "density": 0.5, "seed": 1, "cpsat_terms": 7, "bt_terms": 16, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 7}
+{"n": 40, "density": 1.0, "seed": 0, "cpsat_terms": 7, "bt_terms": 11, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 7}
+{"n": 40, "density": 1.0, "seed": 1, "cpsat_terms": 8, "bt_terms": 12, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 8}
+{"n": 40, "density": 1.5, "seed": 0, "cpsat_terms": 7, "bt_terms": 14, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 7}
+{"n": 40, "density": 1.5, "seed": 1, "cpsat_terms": 7, "bt_terms": 15, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 7}
+{"n": 40, "density": 2.0, "seed": 0, "cpsat_terms": 8, "bt_terms": 18, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 8}
+{"n": 40, "density": 2.0, "seed": 1, "cpsat_terms": 8, "bt_terms": 10, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 8}
+{"n": 60, "density": 0.5, "seed": 0, "cpsat_terms": 10, "bt_terms": 13, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 10}
+{"n": 60, "density": 0.5, "seed": 1, "cpsat_terms": 10, "bt_terms": 13, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 10}
+{"n": 60, "density": 1.0, "seed": 0, "cpsat_terms": 11, "bt_terms": 12, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 12}
+{"n": 60, "density": 1.0, "seed": 1, "cpsat_terms": 10, "bt_terms": 20, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 11}
+{"n": 60, "density": 1.5, "seed": 0, "cpsat_terms": 10, "bt_terms": 13, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 11}
+{"n": 60, "density": 1.5, "seed": 1, "cpsat_terms": 10, "bt_terms": 13, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 11}
+{"n": 60, "density": 2.0, "seed": 0, "cpsat_terms": 11, "bt_terms": 12, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 11}
+{"n": 60, "density": 2.0, "seed": 1, "cpsat_terms": 11, "bt_terms": 12, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 12}
+{"n": 80, "density": 0.5, "seed": 0, "cpsat_terms": 13, "bt_terms": 16, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 14}
+{"n": 80, "density": 0.5, "seed": 1, "cpsat_terms": 13, "bt_terms": 15, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 14}
+{"n": 80, "density": 1.0, "seed": 0, "cpsat_terms": 13, "bt_terms": 15, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 14}
+{"n": 80, "density": 1.0, "seed": 1, "cpsat_terms": 13, "bt_terms": 16, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 14}
+{"n": 80, "density": 1.5, "seed": 0, "cpsat_terms": 13, "bt_terms": 15, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 14}
+{"n": 80, "density": 1.5, "seed": 1, "cpsat_terms": 14, "bt_terms": 16, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 15}
+{"n": 80, "density": 2.0, "seed": 0, "cpsat_terms": 13, "bt_terms": 16, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 15}
+{"n": 80, "density": 2.0, "seed": 1, "cpsat_terms": 15, "bt_terms": 16, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 15}
+{"n": 100, "density": 0.5, "seed": 0, "cpsat_terms": 16, "bt_terms": 18, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 17}
+{"n": 100, "density": 0.5, "seed": 1, "cpsat_terms": 16, "bt_terms": 19, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 16}
+{"n": 100, "density": 1.0, "seed": 0, "cpsat_terms": 16, "bt_terms": 18, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 17}
+{"n": 100, "density": 1.0, "seed": 1, "cpsat_terms": 16, "bt_terms": 19, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 18}
+{"n": 100, "density": 1.5, "seed": 0, "cpsat_terms": 17, "bt_terms": 19, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 18}
+{"n": 100, "density": 1.5, "seed": 1, "cpsat_terms": 16, "bt_terms": 19, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 18}
+{"n": 100, "density": 2.0, "seed": 0, "cpsat_terms": 18, "bt_terms": 20, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 18}
+{"n": 20, "density": 0.5, "seed": 2, "cpsat_terms": 4, "bt_terms": 4, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 4}
+{"n": 20, "density": 1.0, "seed": 2, "cpsat_terms": 4, "bt_terms": 4, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 4}
+{"n": 20, "density": 1.5, "seed": 2, "cpsat_terms": 7, "bt_terms": 7, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 7}
+{"n": 20, "density": 2.0, "seed": 2, "cpsat_terms": 8, "bt_terms": 8, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 8}
+{"n": 100, "density": 2.0, "seed": 1, "cpsat_terms": 19, "bt_terms": 20, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 19}
+{"n": 20, "density": 0.5, "seed": 3, "cpsat_terms": 4, "bt_terms": 4, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 4}
+{"n": 20, "density": 1.0, "seed": 3, "cpsat_terms": 6, "bt_terms": 6, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 6}
+{"n": 20, "density": 1.5, "seed": 3, "cpsat_terms": 7, "bt_terms": 7, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 7}
+{"n": 20, "density": 2.0, "seed": 3, "cpsat_terms": 7, "bt_terms": 7, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 7}
+{"n": 40, "density": 0.5, "seed": 2, "cpsat_terms": 7, "bt_terms": 14, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 7}
+{"n": 40, "density": 0.5, "seed": 3, "cpsat_terms": 7, "bt_terms": 10, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 7}
+{"n": 40, "density": 1.0, "seed": 2, "cpsat_terms": 7, "bt_terms": 15, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 7}
+{"n": 40, "density": 1.0, "seed": 3, "cpsat_terms": 7, "bt_terms": 16, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 8}
+{"n": 40, "density": 1.5, "seed": 2, "cpsat_terms": 7, "bt_terms": 14, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 7}
+{"n": 40, "density": 2.0, "seed": 2, "cpsat_terms": 7, "bt_terms": 13, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 7}
+{"n": 40, "density": 1.5, "seed": 3, "cpsat_terms": 7, "bt_terms": 8, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 8}
+{"n": 60, "density": 0.5, "seed": 2, "cpsat_terms": 10, "bt_terms": 19, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 10}
+{"n": 40, "density": 2.0, "seed": 3, "cpsat_terms": 9, "bt_terms": 9, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 9}
+{"n": 60, "density": 0.5, "seed": 3, "cpsat_terms": 9, "bt_terms": 13, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 10}
+{"n": 60, "density": 1.0, "seed": 2, "cpsat_terms": 11, "bt_terms": 12, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 12}
+{"n": 60, "density": 1.0, "seed": 3, "cpsat_terms": 10, "bt_terms": 12, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 10}
+{"n": 60, "density": 1.5, "seed": 2, "cpsat_terms": 11, "bt_terms": 12, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 11}
+{"n": 60, "density": 1.5, "seed": 3, "cpsat_terms": 10, "bt_terms": 12, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 11}
+{"n": 60, "density": 2.0, "seed": 2, "cpsat_terms": 11, "bt_terms": 12, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 11}
+{"n": 60, "density": 2.0, "seed": 3, "cpsat_terms": 11, "bt_terms": 12, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 11}
+{"n": 80, "density": 0.5, "seed": 2, "cpsat_terms": 13, "bt_terms": 16, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 14}
+{"n": 80, "density": 0.5, "seed": 3, "cpsat_terms": 13, "bt_terms": 16, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 14}
+{"n": 80, "density": 1.0, "seed": 2, "cpsat_terms": 14, "bt_terms": 16, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 15}
+{"n": 80, "density": 1.0, "seed": 3, "cpsat_terms": 13, "bt_terms": 16, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 14}
+{"n": 80, "density": 1.5, "seed": 2, "cpsat_terms": 14, "bt_terms": 16, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 15}
+{"n": 80, "density": 1.5, "seed": 3, "cpsat_terms": 14, "bt_terms": 17, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 15}
+{"n": 80, "density": 2.0, "seed": 2, "cpsat_terms": 14, "bt_terms": 15, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 14}
+{"n": 100, "density": 0.5, "seed": 2, "cpsat_terms": 16, "bt_terms": 17, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 16}
+{"n": 80, "density": 2.0, "seed": 3, "cpsat_terms": 13, "bt_terms": 14, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 13}
+{"n": 100, "density": 1.0, "seed": 2, "cpsat_terms": 17, "bt_terms": 19, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 18}
+{"n": 100, "density": 0.5, "seed": 3, "cpsat_terms": 16, "bt_terms": 17, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 17}
+{"n": 100, "density": 1.5, "seed": 2, "cpsat_terms": 17, "bt_terms": 19, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 18}
+{"n": 100, "density": 1.0, "seed": 3, "cpsat_terms": 17, "bt_terms": 19, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 17}
+{"n": 100, "density": 2.0, "seed": 2, "cpsat_terms": 17, "bt_terms": 19, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 18}
+{"n": 20, "density": 0.5, "seed": 4, "cpsat_terms": 4, "bt_terms": 4, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 4}
+{"n": 20, "density": 1.0, "seed": 4, "cpsat_terms": 4, "bt_terms": 4, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 4}
+{"n": 20, "density": 1.5, "seed": 4, "cpsat_terms": 4, "bt_terms": 4, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 4}
+{"n": 20, "density": 2.0, "seed": 4, "cpsat_terms": 6, "bt_terms": 6, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 6}
+{"n": 40, "density": 0.5, "seed": 4, "cpsat_terms": 7, "bt_terms": 10, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 7}
+{"n": 100, "density": 1.5, "seed": 3, "cpsat_terms": 17, "bt_terms": 20, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 18}
+{"n": 40, "density": 1.0, "seed": 4, "cpsat_terms": 7, "bt_terms": 16, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 7}
+{"n": 100, "density": 2.0, "seed": 3, "cpsat_terms": 17, "bt_terms": 20, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 18}
+{"n": 40, "density": 1.5, "seed": 4, "cpsat_terms": 7, "bt_terms": 19, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 7}
+{"n": 40, "density": 2.0, "seed": 4, "cpsat_terms": 7, "bt_terms": 8, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 8}
+{"n": 60, "density": 0.5, "seed": 4, "cpsat_terms": 10, "bt_terms": 11, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 11}
+{"n": 60, "density": 1.0, "seed": 4, "cpsat_terms": 10, "bt_terms": 17, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 10}
+{"n": 60, "density": 1.5, "seed": 4, "cpsat_terms": 11, "bt_terms": 12, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 11}
+{"n": 60, "density": 2.0, "seed": 4, "cpsat_terms": 10, "bt_terms": 11, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 11}
+{"n": 80, "density": 0.5, "seed": 4, "cpsat_terms": 12, "bt_terms": 15, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 13}
+{"n": 80, "density": 1.0, "seed": 4, "cpsat_terms": 13, "bt_terms": 19, "bt_solver": "backtracking (fallback -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 14}
+{"n": 80, "density": 1.5, "seed": 4, "cpsat_terms": 14, "bt_terms": 15, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 14}
+{"n": 80, "density": 2.0, "seed": 4, "cpsat_terms": 14, "bt_terms": 15, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 15}
+{"n": 100, "density": 0.5, "seed": 4, "cpsat_terms": 16, "bt_terms": 18, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 17}
+{"n": 100, "density": 1.0, "seed": 4, "cpsat_terms": 16, "bt_terms": 19, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 17}
+{"n": 100, "density": 1.5, "seed": 4, "cpsat_terms": 17, "bt_terms": 20, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 18}
+{"n": 100, "density": 2.0, "seed": 4, "cpsat_terms": 18, "bt_terms": 20, "bt_solver": "greedy (search budget exceeded, unbalanced -- install ortools for optimal solving)", "cpsat_with_greedy_electives": 18}

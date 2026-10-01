@@ -116,6 +116,17 @@ Benchmark both solvers on the bundled catalogs:
 cd backend && python bench.py
 ```
 
+## Experiments
+
+`backend/experiments/` holds the scripts behind the AAI 2026 paper: the
+bundled catalogs swept across credit caps, generated catalogs across sizes and
+prerequisite densities, and a breakdown of where the fallback's extra terms
+come from. Each CP-SAT plan carries an optimality certificate -- the same model
+with one fewer term, proven infeasible. Raw output is in `backend/results/`.
+
+See [backend/experiments/README.md](./backend/experiments/README.md) for what
+each script does and how to run it.
+
 ## About the frontend
 
 The UI treats the schedule like a flight plan instead of a spreadsheet.
