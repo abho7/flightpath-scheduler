@@ -111,6 +111,11 @@ cd backend
 pytest tests/ -v
 ```
 
+Benchmark both solvers on the bundled catalogs:
+```bash
+cd backend && python bench.py
+```
+
 ## About the frontend
 
 The UI treats the schedule like a flight plan instead of a spreadsheet.
